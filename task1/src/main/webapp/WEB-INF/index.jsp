@@ -12,26 +12,26 @@
 <div>
     <h2>CREATE</h2>
     <input id="createValue"/>
-    <div id="createMessage"></div>
+    <div id="createStatus"></div>
     <input type="button" id="createButton" value="Create"/>
 </div>
 <div>
     <h2>PUT</h2>
-    <input id="putValue"/>
-    <input id="putNewValue"/>
+    <input id="putValueId"/>
+    <input id="putValueName"/>
     <input type="button" id="putButton" value="Put"/>
-    <div id="putMessage"></div>
+    <div id="putStatus"></div>
 </div>
 <div>
     <h2>DELETE</h2>
     <input id="deleteValue"/>
     <input type="button" id="deleteButton" value="Delete"/>
-    <div id="deleteMessage"></div>
+    <div id="deleteStatus"></div>
 </div>
 <div>
     <h2>GET ALL</h2>
     <input type="button" id="getButton" value="Get all"/>
-    <div id="getMessage"></div>
+    <div id="getStatus"></div>
     <h3>Results</h3>
     <ul id="results"></ul>
 </div>

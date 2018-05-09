@@ -1,22 +1,32 @@
+const VALUES_PATH = '/values';
+
+function writeStatus(element, message) {
+  let now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  hours = "" + (hours < 10 ? "0" + hours : hours);
+  minutes = "" + (minutes < 10 ? "0" + minutes : minutes);
+  seconds = "" + (seconds < 10 ? "0" + seconds : seconds);
+  let currentTime = "[" + hours + ":" + minutes + ":" + seconds + "]";
+  $(element).text(currentTime + ": " + message);
+}
+
 $(document).ready(function () {
   $('#createButton').click(function () {
     $.ajax({
       type: 'POST',
-      url: '/values',
-      data: '{ "value" : "' + $('#createValue').val() + '" }',
-      success: function (response) {
-        var now = new Date();
-        debugger;
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#createMessage').text(currentTime + ": OK");
+      url: VALUES_PATH,
+      data: '{ "name" : "' + $('#createValue').val() + '" }',
+      success: function (data) {
+        writeStatus('#createStatus', "OK " +
+            (data ? "Added: [" + data.id + "] " + data.name : "")
+        );
       },
       error: function (data) {
-        debugger;
-        var now = new Date();
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#createMessage').text(currentTime + ": " + "ERROR");
+        writeStatus('#createStatus', "ERROR " +
+            (data.status ? data.status : "")
+        );
       }
     });
   });
@@ -24,27 +34,25 @@ $(document).ready(function () {
   $('#getButton').click(function () {
     $.ajax({
       type: 'GET',
-      url: '/values',
+      url: VALUES_PATH,
       success: function (data) {
-        var results = document.getElementById("results");
-        debugger;
+        let results = document.getElementById("results");
         if (results) {
           results.innerHTML = "";
-          $.each(JSON.parse(data), function (i, item) {
-            $('#results').append("<li>" + item + "</li>");
-          });
+          for (let i = 0; i < data.length; i++) {
+            $('#results').append("<li>[" + data[i].id + "] "
+                + data[i].name + "</li>");
+          }
         }
-        var now = new Date();
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#getMessage').text(currentTime + ": OK");
+        if (!results || results.innerHTML === "") {
+          results.innerHTML = "No results";
+        }
+        writeStatus('#getStatus', "OK. Results count: " + data.length);
       },
       error: function (data) {
-        var now = new Date();
-        debugger;
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#getMessage').text(currentTime + "[ERROR]: " + data.error);
+        writeStatus('#getStatus', "ERROR " +
+            (data && data.status ? data.status : "")
+        );
       }
     });
   });
@@ -52,44 +60,37 @@ $(document).ready(function () {
   $('#deleteButton').click(function () {
     $.ajax({
       type: 'DELETE',
-      url: '/values',
-      data: '{ "value" : "' + $('#deleteValue').val() + '" }',
-      success: function (response) {
-        var now = new Date();
-        debugger;
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#deleteMessage').text(currentTime + ": OK");
+      url: VALUES_PATH + '/' + $('#deleteValue').val(),
+      success: function (data) {
+        writeStatus('#deleteStatus', "OK " +
+            (data ? "Deleted [" + data.id + "] " + data.name : "")
+        );
       },
       error: function (data) {
-        var now = new Date();
-        debugger;
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#deleteMessage').text(currentTime + "[ERROR]: " + data.error);
+        writeStatus('#deleteStatus', "ERROR " +
+            (data && data.status ? data.status : "")
+        )
       }
     });
   });
 
   $('#putButton').click(function () {
+    let putValueId = $('#putValueId').val();
+    let putValueName = $('#putValueName').val();
     $.ajax({
       type: 'PUT',
-      url: '/values',
-      data: '{ "value" : "' + $('#putValue').val() + '", "newValue" : "' + $(
-          '#putNewValue').val() + '" }',
-      success: function (response) {
-        debugger;
-        var now = new Date();
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#putMessage').text(currentTime + ": OK");
+      url: VALUES_PATH + '/' + putValueId,
+      data: '{ "id" : "' + putValueId
+      + '", "name" : "' + putValueName + '" }',
+      success: function (data) {
+        writeStatus('#putStatus', "OK " +
+            (data ? "Put: [" + data.id + "] " + data.name : "")
+        );
       },
-      error: function (response) {
-        debugger;
-        var now = new Date();
-        var currentTime = "[" + now.getHours() + ":" + now.getMinutes() + ":"
-            + now.getSeconds() + "]";
-        $('#putMessage').text(currentTime + ": " + response);
+      error: function (data) {
+        writeStatus('#putStatus', "ERROR " +
+            (data && data.status ? data.status : "")
+        );
       }
     });
   });
