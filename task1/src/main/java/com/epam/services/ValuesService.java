@@ -1,14 +1,17 @@
 package com.epam.services;
 
+import com.epam.model.Value;
 import java.util.List;
 
 public interface ValuesService {
 
-  void createValue(String value);
+  Value createValue(Value value);
 
-  void deleteValue(String value);
+  Value deleteValue(Integer id);
 
-  List<String> getValues();
+  List<Value> getValues();
 
-  void putValue(String value, String newValue);
+  Value getValue(Integer id);
+
+  Value putValue(Integer id, Value newValue);
 }

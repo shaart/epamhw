@@ -1,8 +1,12 @@
 package com.epam.services.impl;
 
+import com.epam.model.Value;
 import com.epam.services.ValuesService;
+import com.epam.util.IdGenerator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +15,7 @@ public class ValuesServiceImpl implements ValuesService {
 
   private static ValuesService instance;
 
-  private static final List<String> elements = new ArrayList<>();
+  private static final Map<Integer, Value> elements = new HashMap<>();
 
   public static synchronized ValuesService getInstance() {
     if (instance == null) {
@@ -22,25 +26,47 @@ public class ValuesServiceImpl implements ValuesService {
   }
 
   @Override
-  public void createValue(String value) {
-    elements.add(value);
+  public Value createValue(Value value) {
+    int id;
+    do {
+      id = IdGenerator.getId();
+    }
+    while (elements.containsKey(id));
+
+    value.setId(id);
+    elements.put(id, value);
+
+    return value;
   }
 
   @Override
-  public void deleteValue(String value) {
-    elements.removeIf(x -> x.equals(value));
+  public Value deleteValue(Integer id) {
+    Value value = elements.get(id);
+    elements.remove(id);
+
+    return value;
   }
 
   @Override
-  public List<String> getValues() {
-    List<String> result = new ArrayList<>(elements.size());
-    result.addAll(elements);
+  public List<Value> getValues() {
+    List<Value> result = new ArrayList<>(elements.size());
+    result.addAll(elements.values());
 
     return result;
   }
 
   @Override
-  public void putValue(String value, String newValue) {
-    elements.replaceAll(x -> x.equals(value) ? newValue : x);
+  public Value getValue(Integer id) {
+    return elements.get(id);
+  }
+
+  @Override
+  public Value putValue(Integer id, Value value) {
+    if (value == null || !elements.containsKey(id)) {
+      return null;
+    }
+    elements.put(id, value);
+
+    return value;
   }
 }
