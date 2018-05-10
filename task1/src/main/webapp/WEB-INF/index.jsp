@@ -1,6 +1,30 @@
+<%@ page import="java.util.Arrays" %>
 <%@ page language="java" contentType="text/html; chaartset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="pageVisits" value="${cookie['pageVisits'].value}"/>
+<c:choose>
+    <c:when test="${empty pageVisits}">
+        <%
+            Cookie pageVisitsCookie = new Cookie("pageVisits", "1");
+            response.addCookie(pageVisitsCookie);
+        %>
+        <c:set var="pageVisits" value="1"/>
+    </c:when>
+    <c:otherwise>
+        <%
+            Cookie[] cookies = request.getCookies();
+            Cookie pageVisitsCookie = Arrays.stream(cookies)
+                    .filter(cookie -> cookie.getName().equals("pageVisits"))
+                    .findFirst().orElse(null);
+            if (pageVisitsCookie != null) {
+                pageVisitsCookie.setValue(Integer.valueOf(pageVisitsCookie.getValue()) + 1 + "");
+                response.addCookie(pageVisitsCookie);
+            }
+        %>
+        <c:set var="pageVisits" value="${cookie['pageVisits'].value}"/>
+    </c:otherwise>
+</c:choose>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +34,7 @@
 </head>
 <body>
 <div>
+    <h2>Page Visits: ${pageVisits}</h2>
     <h2>CREATE</h2>
     <input id="createValue"/>
     <div id="createStatus"></div>
