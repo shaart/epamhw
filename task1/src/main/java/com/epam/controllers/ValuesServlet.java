@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -20,7 +21,8 @@ public class ValuesServlet extends HttpServlet {
 
   private static final String ROOT_PATH = "/";
   private static final String PATH_SEPARATOR = "/";
-  private ValuesService valuesService;
+  @Setter
+  private static ValuesService valuesService;
 
   @Override
   public void init() {
