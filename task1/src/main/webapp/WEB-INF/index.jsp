@@ -34,7 +34,22 @@
 </head>
 <body>
 <div>
-    <h2>Page Visits: ${pageVisits}</h2>
+    <h2>Info</h2>
+    <p>
+        Server time when responded:
+        <strong> <fmt:formatDate type="both" value="${serverDate}"/> </strong><br>
+        Server is running for ${not empty runtimeMs ? runtimeMs : -1} ms<br>
+        <c:choose>
+            <c:when test="${pageVisits > 0}">
+                You visited this page ${pageVisits} times
+            </c:when>
+            <c:otherwise>
+                You visit this page first time. Welcome!
+            </c:otherwise>
+        </c:choose>
+    </p>
+</div>
+<div>
     <h2>CREATE</h2>
     <input id="createValue"/>
     <div id="createStatus"></div>
