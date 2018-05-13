@@ -66,13 +66,6 @@
       <artifactId>jquery</artifactId>
       <version>${jquery.version}</version>
     </dependency>
-    <!-- Testing REST API -->
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>3.1.0</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-all</artifactId>
