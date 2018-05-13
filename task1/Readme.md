@@ -14,7 +14,7 @@ state can be presented as a large collection of String objects).
 1. Install Apache Tomcat 8 or later
 2. Clone repository `git clone https://github.com/shaart/epamhw.git`
 3. Go to `task1` directory
-4. Build package ```task1-webapp:package```
+4. Build package ```task1-webapp:package -Dmaven.test.skip=true``` (tests require running Tomcat with application)
 5. Start Tomcat by running `bin\startup.bat` (or `bin\startaup.sh` for Linux)
 6. Tomcat will automatically deploy the war
 7. Open [http://localhost:8080/](http://localhost:8080/) in your browser
