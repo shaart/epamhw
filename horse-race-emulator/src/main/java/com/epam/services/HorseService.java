@@ -5,10 +5,12 @@ import com.epam.domain.Horse;
 import com.epam.domain.Rider;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Setter;
 
 public class HorseService {
 
-  private static final List<Horse> horses = new ArrayList<>();
+  @Setter
+  private List<Horse> horses = new ArrayList<>();
 
   private HorseService() {
     fillHorses();

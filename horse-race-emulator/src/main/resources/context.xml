@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+  <util:list id="horseList" value-type="com.epam.domain.Horse">
+  </util:list>
+
   <bean id="horseService" class="com.epam.services.HorseService">
+    <!--<property name="horses" ref="horseList"/>-->
   </bean>
   <bean id="raceService" class="com.epam.services.RaceService">
+    <property name="horseService" ref="horseService"/>
   </bean>
   <bean id="emulationService" class="com.epam.services.EmulationService">
   </bean>
