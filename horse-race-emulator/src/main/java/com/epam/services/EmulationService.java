@@ -1,4 +1,4 @@
-package com.epam.beans;
+package com.epam.services;
 
 public class EmulationService {
 

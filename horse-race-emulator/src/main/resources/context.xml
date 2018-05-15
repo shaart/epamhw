@@ -4,10 +4,10 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="horseService" class="com.epam.beans.HorseService">
+  <bean id="horseService" class="com.epam.services.HorseService">
   </bean>
-  <bean id="raceService" class="com.epam.beans.RaceService">
+  <bean id="raceService" class="com.epam.services.RaceService">
   </bean>
-  <bean id="emulationService" class="com.epam.beans.EmulationService">
+  <bean id="emulationService" class="com.epam.services.EmulationService">
   </bean>
 </beans>

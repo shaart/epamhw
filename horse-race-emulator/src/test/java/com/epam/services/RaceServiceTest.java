@@ -1,4 +1,4 @@
-package com.epam.beans;
+package com.epam.services;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -14,7 +14,7 @@ public class RaceServiceTest {
 
   @Before
   public void prepare() {
-    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
     raceService = (RaceService) context.getBean("raceService");
   }
 
