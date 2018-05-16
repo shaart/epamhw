@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:util="http://www.springframework.org/schema/util"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <util:list id="horseList" value-type="com.epam.domain.Horse">
-  </util:list>
+  <bean id="brown" class="com.epam.domain.Breed">
+    <property name="name" value="Brown"/>
+  </bean>
+
+  <bean id="bob" class="com.epam.domain.Rider">
+    <property name="name" value="Bob"/>
+  </bean>
+
+  <bean id="storm" class="com.epam.domain.Horse">
+    <property name="breed" ref="brown"/>
+    <property name="name" value="Storm"/>
+    <property name="rider" ref="bob"/>
+  </bean>
 
   <bean id="horseService" class="com.epam.services.HorseService">
-    <!--<property name="horses" ref="horseList"/>-->
+    <property name="horses">
+      <list value-type="com.epam.domain.Horse">
+        <ref bean="storm"/>
+      </list>
+    </property>
   </bean>
   <bean id="raceService" class="com.epam.services.RaceService">
     <property name="horseService" ref="horseService"/>

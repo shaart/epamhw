@@ -7,11 +7,13 @@ import com.epam.services.HorseService;
 import com.epam.services.RaceService;
 import java.util.List;
 import java.util.Scanner;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Log4j
+@Setter
 public class Application {
 
   public static void main(String[] args) {

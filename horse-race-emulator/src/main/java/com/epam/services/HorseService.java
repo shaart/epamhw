@@ -10,10 +10,9 @@ import lombok.Setter;
 public class HorseService {
 
   @Setter
-  private List<Horse> horses = new ArrayList<>();
+  private List<Horse> horses;
 
   private HorseService() {
-    fillHorses();
   }
 
   /**
