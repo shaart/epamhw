@@ -51,7 +51,7 @@ public class EmulationService {
     int size = race.getHorses().size();
     log.info("Horses positions: ");
     for (int i = 0; i < size; i++) {
-      log.info(i + ". " + race.getHorses().get(i));
+      log.info((i + 1) + ". " + race.getHorses().get(i));
     }
   }
 }
