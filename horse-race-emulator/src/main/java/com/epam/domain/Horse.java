@@ -19,6 +19,6 @@ public class Horse {
 
   @Override
   public String toString() {
-    return String.format("[%s] %s (%s)", name, rider.getName(), breed.getName());
+    return String.format("[%3$s] %1$s (Rider: %2$s)", name, rider.getName(), breed.getName());
   }
 }
