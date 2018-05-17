@@ -60,43 +60,4 @@ public class HorseService {
     allHorses.addAll(horses);
     return allHorses;
   }
-
-  /**
-   * Find horse by name
-   *
-   * @param name Horse's name
-   * @return Found Horse or null
-   */
-  public Horse findByName(String name) {
-    return horses.stream()
-        .filter(x -> x.getName().equals(name))
-        .findFirst()
-        .orElse(null);
-  }
-
-  /**
-   * Find horse by rider's name
-   *
-   * @param riderName Horse rider's name
-   * @return Found Horse or null
-   */
-  public Horse findByRiderName(String riderName) {
-    return getHorses().stream()
-        .filter(x -> x.getRider().getName().equals(riderName))
-        .findFirst()
-        .orElse(null);
-  }
-
-  /**
-   * Find horse by breed
-   *
-   * @param breed Breed name
-   * @return Found Horse or null
-   */
-  public Horse findByBreed(String breed) {
-    return getHorses().stream()
-        .filter(x -> x.getBreed().getName().equals(breed))
-        .findFirst()
-        .orElse(null);
-  }
 }

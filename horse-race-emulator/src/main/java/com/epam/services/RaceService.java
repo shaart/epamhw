@@ -16,6 +16,7 @@ public class RaceService {
 
   /**
    * Get upcoming race
+   *
    * @return Upcoming race
    */
   public Race getRace() {
@@ -25,10 +26,52 @@ public class RaceService {
     int horsesSize = horses.size();
     int numberOfHorses = horsesSize < RACE_HORSES_COUNT ? horsesSize : RACE_HORSES_COUNT;
 
-    List<Horse> raceHorses = random.ints(numberOfHorses, 0, horsesSize)
+    final int MIN = 0;
+    List<Horse> raceHorses = random.ints(MIN, horsesSize)
+        .distinct()
         .mapToObj(horses::get)
+        .limit(numberOfHorses)
         .collect(Collectors.toList());
 
     return Race.builder().horses(raceHorses).build();
+  }
+
+  /**
+   * Find horse by name
+   *
+   * @param name Horse's name
+   * @return Found Horse or null
+   */
+  public Horse findByName(Race race, String name) {
+    return race.getHorses().stream()
+        .filter(x -> x.getName().equalsIgnoreCase(name))
+        .findFirst()
+        .orElse(null);
+  }
+
+  /**
+   * Find horse by rider's name
+   *
+   * @param riderName Horse rider's name
+   * @return Found Horse or null
+   */
+  public Horse findByRiderName(Race race, String riderName) {
+    return race.getHorses().stream()
+        .filter(x -> x.getRider().getName().equalsIgnoreCase(riderName))
+        .findFirst()
+        .orElse(null);
+  }
+
+  /**
+   * Find horse by breed
+   *
+   * @param breed Breed name
+   * @return Found Horse or null
+   */
+  public Horse findByBreed(Race race, String breed) {
+    return race.getHorses().stream()
+        .filter(x -> x.getBreed().getName().equalsIgnoreCase(breed))
+        .findFirst()
+        .orElse(null);
   }
 }
