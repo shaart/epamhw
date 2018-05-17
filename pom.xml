@@ -9,7 +9,7 @@
   <artifactId>epamhw</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>task1</module>
+    <module>task1-servlet</module>
     <module>horse-race-emulator</module>
     <module>horse-race-emulator-annotations</module>
   </modules>
