@@ -11,6 +11,7 @@
   <modules>
     <module>task1</module>
     <module>horse-race-emulator</module>
+    <module>horse-race-emulator-annotations</module>
   </modules>
   <packaging>pom</packaging>
 
