@@ -3,25 +3,49 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-  <bean id="brown" class="com.epam.domain.Breed">
-    <property name="name" value="Brown"/>
+  <!-- Breeds -->
+  <bean id="auxois" class="com.epam.domain.Breed">
+    <property name="name" value="Auxois"/>
   </bean>
-
+  <bean id="konik" class="com.epam.domain.Breed">
+    <property name="name" value="Konik"/>
+  </bean>
+  <bean id="pottok" class="com.epam.domain.Breed">
+    <property name="name" value="Pottok"/>
+  </bean>
+  <!-- Riders -->
   <bean id="bob" class="com.epam.domain.Rider">
     <property name="name" value="Bob"/>
   </bean>
-
+  <bean id="jack" class="com.epam.domain.Rider">
+    <property name="name" value="Jack"/>
+  </bean>
+  <bean id="paul" class="com.epam.domain.Rider">
+    <property name="name" value="Paul"/>
+  </bean>
+  <!-- Horses -->
   <bean id="storm" class="com.epam.domain.Horse">
-    <property name="breed" ref="brown"/>
+    <property name="breed" ref="auxois"/>
     <property name="name" value="Storm"/>
     <property name="rider" ref="bob"/>
   </bean>
-
+  <bean id="thunderbolt" class="com.epam.domain.Horse">
+    <property name="breed" ref="konik"/>
+    <property name="name" value="Thunderbolt"/>
+    <property name="rider" ref="jack"/>
+  </bean>
+  <bean id="rain" class="com.epam.domain.Horse">
+    <property name="breed" ref="pottok"/>
+    <property name="name" value="Rain"/>
+    <property name="rider" ref="paul"/>
+  </bean>
+  <!-- Services -->
   <bean id="horseService" class="com.epam.services.HorseService">
     <property name="horses">
       <list value-type="com.epam.domain.Horse">
         <ref bean="storm"/>
+        <ref bean="thunderbolt"/>
+        <ref bean="rain"/>
       </list>
     </property>
   </bean>
