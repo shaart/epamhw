@@ -3,4 +3,23 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="a" class="com.epam.A">
+    <property name="value" value="A class"/>
+  </bean>
+  <bean id="b" class="com.epam.B">
+    <constructor-arg ref="a"/>
+  </bean>
+  <bean id="c" class="com.epam.C" scope="singleton">
+    <property name="d" ref="d"/>
+  </bean>
+  <bean id="d" class="com.epam.D" scope="prototype">
+    <property name="value" value="D class"/>
+  </bean>
+  <bean id="e" class="com.epam.E">
+    <replaced-method name="hello" replacer="replacer"/>
+  </bean>
+  <bean id="replacer" class="com.epam.Replacecer"/>
+  <bean id="f" class="com.epam.F" init-method="init" destroy-method="destroy">
+
+  </bean>
 </beans>
